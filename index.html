@@ -3,403 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Login Page</title>
     <style>
         body {
             background: linear-gradient(to right, #2c3e50, #4ca1af);
             font-family: Arial, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 90%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #4ca1af 3px solid;
-        }
-        header h1 {
-            text-align: center;
-            text-transform: uppercase;
-            margin: 0;
-        }
-        .options {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .option {
-            background: #4ca1af;
-            color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            flex: 1;
-            margin: 0 10px;
-        }
-        .option:hover {
-            background: #2c3e50;
-        }
-        .content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background: #4ca1af;
-            color: #fff;
-        }
-        .progress-chart, .attendance-calendar, .task-grid {
-            margin: 20px 0;
-        }
-        .progress-chart, .attendance-calendar {
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .task-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        .task-block {
-            background: #4ca1af;
-            color: #fff;
+        .login-container {
+            background: white;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
             text-align: center;
-            position: relative;
         }
-        .task-block .time-left {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #fff;
-            color: #4ca1af;
-            padding: 5px;
-            border-radius: 5px;
+        .login-container h1 {
+            margin-bottom: 20px;
         }
-        .team-names {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .team-name {
-            cursor: pointer;
+        .login-container select, .login-container input {
+            width: 100%;
             padding: 10px;
-            background: #4ca1af;
-            color: #fff;
+            margin: 10px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .team-name:hover {
-            background: #2c3e50;
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #4e54c8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        
+        .login-container button:hover {
+            background: #8f94fb;
+        }
+        .login-container a {
+            display: block;
+            margin-top: 10px;
+            color: #4e54c8;
+            text-decoration: none;
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome, Admin John Doe</h1>
-    </header>
-    <div class="container">
-        <div class="options">
-            <div class="option" onclick="showSection('teams')">Teams</div>
-            <div class="option" onclick="showSection('progress')">Progress</div>
-            <div class="option" onclick="showSection('attendance')">Attendance</div>
-            <div class="option" onclick="showSection('assign-task')">Assign a Task</div>
-        </div>
-        <div class="content">
-            <!-- Teams Section -->
-            <div id="teams" class="section">
-                <h2>Teams</h2>
-                <table>
-                    <tr>
-                        <th>Team Name</th>
-                        <th>Team Leader</th>
-                        <th>Team Members</th>
-                    </tr>
-                    <tr>
-                        <td>Team Alpha</td>
-                        <td>Alice</td>
-                        <td>Bob, Charlie, Dave</td>
-                    </tr>
-                    <tr>
-                        <td>Team Beta</td>
-                        <td>Eve</td>
-                        <td>Frank, Grace, Heidi</td>
-                    </tr>
-                    <tr>
-                        <td>Team Gamma</td>
-                        <td>Ivy</td>
-                        <td>Jack, Karen, Leo</td>
-                    </tr>
-                    <tr>
-                        <td>Team Delta</td>
-                        <td>Mia</td>
-                        <td>Nina, Oscar, Paul</td>
-                    </tr>
-                    <tr>
-                        <td>Team Epsilon</td>
-                        <td>Quinn</td>
-                        <td>Rachel, Steve, Tina</td>
-                    </tr>
-                    <tr>
-                        <td>Team Zeta</td>
-                        <td>Uma</td>
-                        <td>Victor, Wendy, Xavier</td>
-                    </tr>
-                    <tr>
-                        <td>Team Eta</td>
-                        <td>Yara</td>
-                        <td>Zane, Abby, Ben</td>
-                    </tr>
-                    <tr>
-                        <td>Team Theta</td>
-                        <td>Chris</td>
-                        <td>Diana, Ethan, Fiona</td>
-                    </tr>
-                    <tr>
-                        <td>Team Iota</td>
-                        <td>George</td>
-                        <td>Hannah, Ian, Julia</td>
-                    </tr>
-                    <tr>
-                        <td>Team Kappa</td>
-                        <td>Kyle</td>
-                        <td>Liam, Maya, Noah</td>
-                    </tr>
-                </table>
-            </div>
-            <!-- Progress Section -->
-            <div id="progress" class="section" style="display:none;">
-                <h2>Progress</h2>
-                <div class="team-names">
-                    <div class="team-name" onclick="showTeamProgress('Team Alpha')">Team Alpha</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Beta')">Team Beta</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Gamma')">Team Gamma</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Delta')">Team Delta</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Epsilon')">Team Epsilon</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Zeta')">Team Zeta</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Eta')">Team Eta</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Theta')">Team Theta</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Iota')">Team Iota</div>
-                    <div class="team-name" onclick="showTeamProgress('Team Kappa')">Team Kappa</div>
-                </div>
-                <div class="progress-chart">
-                    <canvas id="progressChart" width="200" height="200"></canvas>
-                </div>
-                <div id="progressDetails"></div>
-            </div>
-            <!-- Attendance Section -->
-<div id="attendance" class="section" style="display:none;">
-    <h2>Attendance</h2>
-    <div class="team-buttons" style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-        <div class="team-name" onclick="showTeamAttendance('Team Alpha')">Team Alpha</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Beta')">Team Beta</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Gamma')">Team Gamma</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Delta')">Team Delta</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Epsilon')">Team Epsilon</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Zeta')">Team Zeta</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Eta')">Team Eta</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Theta')">Team Theta</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Iota')">Team Iota</div>
-        <div class="team-name" onclick="showTeamAttendance('Team Kappa')">Team Kappa</div>
-    </div>
-    <div class="attendance-calendar">
-        <table id="attendanceTable">
-            <tr>
-                <th>Team Member</th>
-                <th>Attendance</th>
-                <th>Days Present</th>
-                <th>Days Absent</th>
-                <th>Attendance %</th>
-            </tr>
-            <tr>
-                <td>Alice</td>
-                <td>20/22</td>
-                <td>20</td>
-                <td>2</td>
-                <td>90.91%</td>
-            </tr>
-            <!-- More rows as needed -->
-        </table>
-    </div>
-    <div id="attendanceCalendar"></div>
-</div>
-
-            
-            <script>
-            function showTeamAttendance(teamName) {
-                // Logic to filter and display attendance for the selected team
-                // This function should update the attendanceTable and attendanceCalendar based on the selected team
-            }
-            </script>
-            <!-- Assign a Task Section -->
-            <div id="assign-task" class="section" style="display:none;">
-                <h2>Assign a Task</h2>
-                <div class="task-grid">
-                    <div class="task-block">
-                        <div class="time-left">Time Left: 2d</div>
-                        <h3>Project Alpha</h3>
-                        <p>Task: Design UI</p>
-                        <p>Deadline: 2024-09-15</p>
-                    </div>
-                    <div class="task-block">
-                        <div class="time-left">Time Left: 5d</div>
-                        <h3>Project Beta</h3>
-                        <p>Task: Develop Backend</p>
-                        <p>Deadline: 2024-09-18</p>
-                    </div>
-                    <!-- Add more task blocks as needed -->
-                </div>
-            </div>
-        </div>
+    <div class="login-container">
+        <h1>Company Name</h1>
+        <form id="loginForm">
+            <select id="userType">
+                <option value="admin">Admin</option>
+                <option value="employee">Employee</option>
+            </select>
+            <input type="text" id="userId" placeholder="User ID" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+        </form>
+        <a href="#">Forgot Password?</a>
     </div>
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
-        }
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userType = document.getElementById('userType').value;
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
 
-        const teamsData = {
-            'Team Alpha': {
-                leader: 'Alice',
-                members: 'Bob, Charlie, Dave',
-                progress: 75,
-                chartData: [30, 20, 25, 25]
-            },
-            'Team Beta': {
-                leader: 'Eve',
-                members: 'Frank, Grace, Heidi',
-                progress: 60,
-                chartData: [20, 20, 20, 40]
-            },
-            'Team Gamma': {
-                leader: 'Ivy',
-                members: 'Jack, Karen, Leo',
-                progress: 80,
-                chartData: [25, 25, 25, 25]
-            },
-            'Team Delta': {
-                leader: 'Mia',
-                members: 'Nina, Oscar, Paul',
-                progress: 50,
-                chartData: [20, 20, 20, 40]
-            },
-            'Team Epsilon': {
-                leader: 'Quinn',
-                members: 'Rachel, Steve, Tina',
-                progress: 70,
-                chartData: [30, 20, 20, 30]
-            },
-            'Team Zeta': {
-                leader: 'Uma',
-                members: 'Victor, Wendy, Xavier',
-                progress: 65,
-                chartData: [25, 25, 25, 25]
-            },
-            'Team Eta': {
-                leader: 'Yara',
-                members: 'Zane, Abby, Ben',
-                progress: 85,
-                chartData: [30, 20, 20, 30]
-            },
-            'Team Theta': {
-                leader: 'Chris',
-                members: 'Diana, Ethan, Fiona',
-                progress: 55,
-                chartData: [20, 20, 20, 40]
-            },
-            'Team Iota': {
-                leader: 'George',
-                members: 'Hannah, Ian, Julia',
-                progress: 90,
-                chartData: [30, 20, 20, 30]
-            },
-            'Team Kappa': {
-                leader: 'Kyle',
-                members: 'Liam, Maya, Noah',
-                progress: 95,
-                chartData: [35, 20, 20, 25]
-            }
-        };
+            console.log('Form submitted');
+            console.log('User Type:', userType);
+            console.log('User ID:', userId);
+            console.log('Password:', password);
 
-        const ctx = document.getElementById('progressChart').getContext('2d');
-        let progressChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Alice', 'Bob', 'Charlie', 'Dave'],
-                datasets: [{
-                    label: 'Team Progress',
-                    data: [30, 20, 25, 25],
-                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed !== null) {
-                                    label += context.parsed + '%';
-                                }
-                                return label;
-                            }
-                        }
-                    }
+            // Predefined credentials
+            const credentials = {
+                admin: { userId: 'admin', password: 'admin123' },
+                employee: { userId: 'employee', password: 'employee123' }
+            };
+
+            if (credentials[userType] && credentials[userType].userId === userId && credentials[userType].password === password) {
+                console.log('Credentials matched');
+                if (userType === 'admin') {
+                    window.location.href = 'admin.html';
+                } else if (userType === 'employee') {
+                    window.location.href = 'employee.html'; // Redirect to employee dashboard
                 }
+            } else {
+                console.log('Invalid credentials');
+                alert('Invalid credentials. Please try again.');
             }
         });
-
-        function showTeamProgress(teamName) {
-            const team = teamsData[teamName];
-            document.getElementById('progressDetails').innerHTML = `
-                <h3>${teamName}</h3>
-                <p>Leader: ${team.leader}</p>
-                <p>Members: ${team.members}</p>
-                <p>Progress: ${team.progress}%</p>
-            `;
-
-            progressChart.data.labels = [team.leader, ...team.members.split(', ')];
-            progressChart.data.datasets[0].data = team.chartData;
-            progressChart.update();
-
-            showSection('progress');
-        }
-
-        // Initialize with the first team's progress
-        showTeamProgress('Team Alpha');
     </script>
 </body>
 </html>
