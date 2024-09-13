@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Page</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .loading-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('background.jpg') no-repeat center center/cover;
+            position: relative;
+        }
+        .loading-page h1 {
+            font-size: 3em;
+            color: #fff;
+        }
+        .loading-page .manager, .loading-page .team-lead, .loading-page .team-name {
+            position: absolute;
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .loading-page .manager {
+            bottom: 10px;
+            left: 10px;
+        }
+        .loading-page .team-lead {
+            bottom: 10px;
+            right: 10px;
+        }
+        .loading-page .team-name {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .container {
+            display: none;
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #4ca1af 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background: #4ca1af;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background: #2c3e50;
+        }
+        .content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .task-block {
+            background: #4ca1af;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+        .task-block img {
+            width: 75%;
+            height: auto;
+        }
+        .task-block .details {
+            width: 25%;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .calendar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .leave-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .leave-form input, .leave-form textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .leave-form button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #4ca1af;
+            color: #fff;
+            cursor: pointer;
+        }
+        .leave-form button:hover {
+            background: #2c3e50;
+        }
+        .leave-status {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .leave-status .status-block {
+            background: #4ca1af;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .profile-form input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .profile-form label {
+            font-weight: bold;
+        }
+        .profile-form .section-title {
+            background: #4ca1af;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-page').style.display = 'none';
+                document.querySelector('.container').style.display = 'block';
+            }, 5000);
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function fillDate(inputId, date) {
+            document.getElementById(inputId).value = date;
+        }
+
+        function applyLeave() {
+            alert('Leave applied successfully!');
+        }
+
+        function cancelLeave() {
+            document.getElementById('start-date').value = '';
+            document.getElementById('end-date').value = '';
+            document.getElementById('reason').value = '';
+        }
+    </script>
+</head>
+<body>
+    <div class="loading-page">
+        <h1>Hi, John Smith</h1>
+        <div class="manager">Manager: John Doe</div>
+        <div class="team-lead">Team Lead: Jane Smith</div>
+        <div class="team-name">Team: Alpha</div>
+    </div>
+    <div class="container">
+        <header>
+            <h1>Employee Dashboard</h1>
+        </header>
+        <nav>
+            <a href="#" onclick="showSection('tasks')">Tasks Assigned</a>
+            <a href="#" onclick="showSection('leave')">Apply for a Leave</a>
+            <a href="#" onclick="showSection('profile')">Profile</a>
+        </nav>
+        <div class="content">
+            <!-- Tasks Assigned Section -->
+            <div id="tasks" class="section">
+                <h2>Tasks Assigned</h2>
+                <div class="task-grid">
+                    <!-- Example task blocks -->
+                    <div class="task-block">
+                        <img src="https://i.pinimg.com/564x/eb/aa/6e/ebaa6edb2fb56139dc313119220a6a90.jpg" alt="Task Image"style="width: 100px; height: auto;">
+                        <div class="details">
+                            <h3>Develop Login Page</h3>
+                            <p>Deadline: 2024-09-15</p>
+                            <p>Progress: 50%</p>
+                        </div>
+                    </div>
+                    <div class="task-block">
+                        <img src="https://i.pinimg.com/736x/04/17/80/04178000170bf1ca61bc8864ea763d16.jpg" alt="Task Image"style="width: 100px; height: auto;">
+                        <div class="details">
+                            <h3>Design Dashboard</h3>
+                            <p>Deadline: 2024-09-18</p>
+                            <p>Progress: 75%</p>
+                        </div>
+                    </div>
+                    <div class="task-block">
+                        <img src="https://i.pinimg.com/564x/83/b2/5c/83b25c6a6b41866253e55477c5e6c672.jpg" alt="Task Image"style="width: 100px; height: auto;">
+                        <div class="details">
+                            <h3>Implement API</h3>
+                            <p>Deadline: 2024-09-20</p>
+                            <p>Progress: 30%</p>
+                        </div>
+                    </div>
+                    <div class="task-block">
+                        <img src="https://i.pinimg.com/564x/9f/9f/67/9f9f675fb305b55960da1af999bbdc6f.jpg" alt="Task Image"style="width: 100px; height: auto;">
+                        <div class="details">
+                            <h3>Test Application</h3>
+                            <p>Deadline: 2024-09-22</p>
+                            <p>Progress: 60%</p>
+                        </div>
+                    </div>
+                    <!-- Add more task blocks as needed -->
+                </div>
+            </div>
+            <!-- Apply for a Leave Section -->
+            <div id="leave" class="section" style="display:none;">
+                <h2>Apply for a Leave</h2>
+                <div class="calendar">
+                    <!-- Calendar will be here -->
+                </div>
+                <div class="leave-form">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                    <label for="reason">Reason for Leave:</label>
+                    <textarea id="reason"></textarea>
+                    <button onclick="applyLeave()">Apply</button>
+                    <button onclick="cancelLeave()">Cancel</button>
+                </div>
+                <div class="leave-status">
+                    <div class="status-block" style="background: #ffcc00;">Pending Leave: 2024-09-10 to 2024-09-12</div>
+                    <div class="status-block" style="background: #00cc66;">Approved Leave: 2024-08-01 to 2024-08-05</div>
+                    <div class="status-block" style="background: #ffcc00;">Pending Leave: 2024-09-20 to 2024-09-22</div>
+                    <div class="status-block" style="background: #00cc66;">Approved Leave: 2024-07-15 to 2024-07-20</div>
+                    <div class="status-block" style="background: #ffcc00;">Pending Leave: 2024-10-01 to 2024-10-03</div>
+                </div>
+            </div>
+            <!-- Profile Section -->
+            <div id="profile" class="section" style="display:none;">
+                <h2>Profile</h2>
+                <div class="profile-form">
+                    <div class="section-title">Personal Information</div>
+                    <label for="employee-name">Employee Name:</label>
+                    <input type="text" id="employee-name" value="John Smith" readonly>
+                    <label for="employee-id">Employee ID:</label>
+                    <input type="text" id="employee-id" value="12345" readonly>
+                    <label for="manager-name">Manager Name:</label>
+                    <input type="text" id="manager-name" value="John Doe" readonly>
+                    <label for="team-leader-name">Team Leader Name:</label>
+                    <input type="text" id="team-leader-name" value="Jane Smith" readonly>
+                    <label for="contact-number">Contact Number:</label>
+                    <input type="text" id="contact-number" value="9876543210">
+                    <label for="date-of-joining">Date of Joining:</label>
+                    <input type="text" id="date-of-joining" value="2022-01-01" readonly>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" value="john.smith@example.com">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" value="123 Main St, City, Country">
+                </div>
+            </div>
+        </div>        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    document.querySelector('.loading-page').style.display = 'none';
+                    document.querySelector('.container').style.display = 'block';
+                }, 2200); // Reduced delay to 1 second
+            });
+        
+            function showSection(sectionId) {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(sectionId).style.display = 'block';
+            }
+        
+            function fillDate(inputId, date) {
+                document.getElementById(inputId).value = date;
+            }
+        
+            function applyLeave() {
+                // Function implementation
+            }
+        </script>
+    </div>
+</body>
+</html>
